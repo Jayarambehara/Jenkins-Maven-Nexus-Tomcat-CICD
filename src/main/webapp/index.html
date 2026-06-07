@@ -3,253 +3,357 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>TravelHub Pro | Login • Book • History • Payments</title>
+    <title>Velora | Premium Travel Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
         }
 
         body {
-            background: linear-gradient(135deg, #e8f0f5 0%, #d4e2ed 100%);
+            font-family: 'Inter', sans-serif;
+            background: #f0f5fa;
             min-height: 100vh;
+            color: #1a2c3e;
         }
 
-        /* Header with user info */
+        /* Modern Glassmorphic Header */
         .main-header {
-            background: linear-gradient(95deg, #0b2b3d, #1a5a7a);
-            color: white;
-            padding: 1.2rem 2rem;
+            background: rgba(10, 25, 47, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            padding: 0.9rem 3rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 15px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            gap: 18px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
         }
+
         .logo h1 {
-            font-size: 1.6rem;
+            font-size: 1.7rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFFFFF, #A5D8FF);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
+
         .logo p {
             font-size: 0.7rem;
-            opacity: 0.8;
+            color: #B0D4FF;
+            letter-spacing: 0.5px;
         }
+
         .user-area {
             display: flex;
             align-items: center;
-            gap: 15px;
-            background: rgba(255,255,255,0.15);
-            padding: 8px 18px;
-            border-radius: 40px;
+            gap: 20px;
+            background: rgba(255,255,255,0.12);
+            padding: 8px 22px;
+            border-radius: 60px;
+            backdrop-filter: blur(4px);
+            transition: all 0.2s;
         }
+
         .user-greeting {
             font-weight: 500;
+            font-size: 0.9rem;
+            color: #F0F9FF;
         }
+
         .auth-btn {
-            background: #ffb347;
+            background: linear-gradient(105deg, #F59E0B, #D97706);
             border: none;
-            padding: 6px 16px;
-            border-radius: 30px;
+            padding: 8px 22px;
+            border-radius: 40px;
             cursor: pointer;
-            font-weight: bold;
-            color: #1e3a5f;
+            font-weight: 700;
+            color: #1e293b;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-size: 0.85rem;
         }
+
         .auth-btn.logout {
-            background: #e74c3c;
+            background: linear-gradient(105deg, #EF4444, #DC2626);
             color: white;
+        }
+
+        .auth-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.2);
         }
 
         /* container */
         .portal-container {
             max-width: 1400px;
-            margin: 1.5rem auto;
-            padding: 0 1.5rem;
+            margin: 2rem auto;
+            padding: 0 1.8rem;
         }
 
-        /* service cards grid */
+        /* Enhanced service cards */
         .service-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
-            margin-bottom: 1.8rem;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 1.3rem;
+            margin-bottom: 2.2rem;
         }
+
         .service-card {
-            background: white;
-            padding: 1rem 0.5rem;
-            border-radius: 1.2rem;
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(4px);
+            padding: 1rem 0.2rem;
+            border-radius: 2rem;
             text-align: center;
             cursor: pointer;
-            transition: all 0.25s ease;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            border: 1px solid rgba(26,90,122,0.2);
+            transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            border: 1px solid rgba(255,255,255,0.6);
         }
-        .service-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.12);
-            border-color: #1a5a7a;
-        }
-        .service-icon { font-size: 2rem; margin-bottom: 5px; }
-        .service-card h3 { font-size: 0.9rem; color: #1e3a5f; }
 
-        /* Tabs: Booking / History */
+        .service-card:hover {
+            transform: translateY(-8px);
+            background: white;
+            box-shadow: 0 22px 35px -12px rgba(0, 32, 64, 0.2);
+            border-color: #FFB347;
+        }
+
+        .service-icon { font-size: 2.4rem; margin-bottom: 8px; }
+        .service-card h3 { font-size: 1rem; font-weight: 700; color: #0f2b3d; letter-spacing: -0.2px; }
+
+        /* Premium Tabs */
         .tabs {
             display: flex;
-            gap: 1rem;
-            margin-bottom: 1.2rem;
-            border-bottom: 2px solid #cbd5e1;
-        }
-        .tab-btn {
-            background: none;
-            border: none;
-            padding: 12px 24px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            color: #4a627a;
-            transition: 0.2s;
-        }
-        .tab-btn.active {
-            color: #1a5a7a;
-            border-bottom: 3px solid #1a5a7a;
+            gap: 0.5rem;
+            margin-bottom: 1.8rem;
+            background: rgba(255,255,255,0.6);
+            padding: 0.4rem;
+            border-radius: 3rem;
+            width: fit-content;
+            backdrop-filter: blur(4px);
         }
 
-        /* booking panel */
+        .tab-btn {
+            background: transparent;
+            border: none;
+            padding: 12px 32px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 2rem;
+            cursor: pointer;
+            color: #335;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background: #1E4A6E;
+            color: white;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+
+        /* Booking panel - glass card */
         .booking-panel {
-            background: rgba(255,255,255,0.98);
-            border-radius: 1.5rem;
-            padding: 1.5rem;
-            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
-            margin-bottom: 1.5rem;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(2px);
+            border-radius: 2rem;
+            padding: 1.8rem;
+            box-shadow: 0 30px 45px -20px rgba(0, 32, 64, 0.25);
+            border: 1px solid rgba(255,255,240,0.7);
+            transition: all 0.2s;
         }
+
         .panel-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            margin-bottom: 1.2rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 1.6rem;
+            border-left: 5px solid #F59E0B;
+            padding-left: 1rem;
         }
-        .panel-title { font-size: 1.4rem; font-weight: 700; color: #0b2b3d; display: flex; align-items: center; gap: 10px; }
+
+        .panel-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1E3A5F, #2C6280);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
 
         .form-row {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-bottom: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.2rem;
+            margin-bottom: 1.2rem;
         }
+
         .input-group {
             display: flex;
             flex-direction: column;
-            gap: 5px;
-        }
-        .input-group label {
-            font-weight: 600;
-            font-size: 0.8rem;
-            color: #1e4663;
-        }
-        .input-group input, .input-group select {
-            padding: 10px 12px;
-            border-radius: 1rem;
-            border: 1.5px solid #e2e8f0;
-            background: #fefefe;
-        }
-        .ride-options {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-        .ride-type-btn {
-            background: #f1f5f9;
-            padding: 6px 14px;
-            border-radius: 30px;
-            font-size: 0.75rem;
-            cursor: pointer;
-            border: 1px solid #cbd5e1;
-        }
-        .ride-type-btn.selected-ride {
-            background: #1a5a7a;
-            color: white;
-        }
-        .book-btn {
-            background: linear-gradient(95deg, #1a5a7a, #0b3b4f);
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 2rem;
-            font-weight: bold;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 10px;
+            gap: 7px;
         }
 
-        /* Payment Modal */
+        .input-group label {
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #2C5368;
+        }
+
+        .input-group input, .input-group select {
+            padding: 12px 15px;
+            border-radius: 1.2rem;
+            border: 1.5px solid #E2EDF2;
+            background: #ffffff;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+
+        .input-group input:focus, .input-group select:focus {
+            border-color: #F59E0B;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(245,158,11,0.2);
+        }
+
+        .ride-options {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .ride-type-btn {
+            background: #F0F4F9;
+            padding: 7px 18px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            font-weight: 500;
+            transition: 0.2s;
+            border: 1px solid #CCE0E8;
+        }
+
+        .ride-type-btn.selected-ride {
+            background: #1E4A6E;
+            color: white;
+            border-color: #1E4A6E;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+
+        .book-btn {
+            background: linear-gradient(95deg, #F59E0B, #EA580C);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 2rem;
+            font-weight: 800;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 18px;
+            transition: all 0.2s;
+            letter-spacing: 0.5px;
+        }
+
+        .book-btn:hover {
+            background: linear-gradient(95deg, #EA580C, #C2410C);
+            transform: scale(0.99);
+            box-shadow: 0 8px 18px rgba(234,88,12,0.3);
+        }
+
+        /* modern modal */
         .modal {
             display: none;
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: rgba(15, 30, 45, 0.7);
+            backdrop-filter: blur(10px);
             justify-content: center;
             align-items: center;
             z-index: 1000;
         }
-        .modal-content {
-            background: white;
-            max-width: 400px;
-            width: 90%;
-            padding: 1.8rem;
-            border-radius: 1.5rem;
-            text-align: center;
-        }
-        .payment-option {
-            background: #f8fafc;
-            padding: 12px;
-            margin: 10px 0;
-            border-radius: 1rem;
-            cursor: pointer;
-            border: 1px solid #e2e8f0;
-        }
-        .payment-option:hover { background: #e6f7f0; }
 
-        /* History Table */
+        .modal-content {
+            background: rgba(255,255,255,0.98);
+            max-width: 420px;
+            width: 90%;
+            padding: 2rem;
+            border-radius: 2rem;
+            text-align: center;
+            box-shadow: 0 35px 45px -20px black;
+            border: 1px solid #FFE6C7;
+        }
+
+        .payment-option {
+            background: #F8FAFE;
+            padding: 14px;
+            margin: 12px 0;
+            border-radius: 1.2rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+            border: 1px solid #E0EDF2;
+        }
+
+        .payment-option:hover {
+            background: #FFF0E0;
+            border-color: #F59E0B;
+            transform: translateX(4px);
+        }
+
+        /* history table */
         .history-table {
             width: 100%;
-            border-collapse: collapse;
-            background: white;
-            border-radius: 1rem;
-            overflow: hidden;
-        }
-        .history-table th, .history-table td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        .history-table th {
-            background: #1a5a7a;
-            color: white;
-        }
-        .empty-history {
-            text-align: center;
-            padding: 2rem;
-            color: #7e8aa8;
-        }
-        .fare-calendar {
-            background: #f1f5f9;
-            padding: 1rem;
-            border-radius: 1rem;
-            margin-top: 1rem;
-            font-size: 0.8rem;
+            border-collapse: separate;
+            border-spacing: 0 8px;
         }
 
-        @media (max-width: 680px) {
-            .service-grid { gap: 0.6rem; }
-            .tab-btn { padding: 8px 16px; }
+        .history-table th {
+            background: #1E3A5F;
+            color: white;
+            padding: 12px;
+            border-radius: 1rem 1rem 0 0;
+        }
+
+        .history-table td {
+            background: white;
+            padding: 14px 12px;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+
+        .empty-history {
+            text-align: center;
+            padding: 2.5rem;
+            background: #F9FCFE;
+            border-radius: 2rem;
+            color: #5F7F9A;
+            font-weight: 500;
+        }
+
+        .fare-calendar {
+            background: linear-gradient(115deg, #FEF9E6, #FFF6E8);
+            padding: 0.9rem;
+            border-radius: 1.2rem;
+            margin-top: 1rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            border-left: 4px solid #F59E0B;
+        }
+
+        @media (max-width: 700px) {
+            .main-header { padding: 0.8rem 1.5rem; }
+            .portal-container { padding: 0 1rem; }
+            .tab-btn { padding: 8px 20px; }
         }
     </style>
 </head>
@@ -257,12 +361,12 @@
 
 <div class="main-header">
     <div class="logo">
-        <h1>🌍 TravelHub Pro</h1>
-        <p>Flights • Trains • Buses • Cabs</p>
+        <h1><i class="fas fa-globe-americas" style="color:#FFB347;"></i> Velora</h1>
+        <p>luxury • seamless • smart travel</p>
     </div>
     <div class="user-area" id="userArea">
-        <span class="user-greeting" id="userGreeting">👋 Guest</span>
-        <button class="auth-btn" id="authBtn">Login / Signup</button>
+        <span class="user-greeting" id="userGreeting"><i class="far fa-user-circle"></i> Guest</span>
+        <button class="auth-btn" id="authBtn"><i class="fas fa-key"></i> Login / Signup</button>
     </div>
 </div>
 
@@ -270,51 +374,47 @@
     <div class="service-grid" id="serviceGrid"></div>
 
     <div class="tabs">
-        <button class="tab-btn active" data-tab="booking">📅 Book Travel</button>
-        <button class="tab-btn" data-tab="history">📜 Booking History</button>
+        <button class="tab-btn active" data-tab="booking"><i class="fas fa-calendar-alt"></i> Book New Trip</button>
+        <button class="tab-btn" data-tab="history"><i class="fas fa-clock-rotate-left"></i> Journey Log</button>
     </div>
 
-    <!-- Booking Panel -->
     <div id="bookingTab" class="booking-panel">
         <div class="panel-header">
-            <div class="panel-title" id="panelTitle"><span>🚕</span> Select a service</div>
+            <div class="panel-title" id="panelTitle"><i class="fas fa-sparkle"></i> Begin your journey</div>
         </div>
         <div id="dynamicFormContainer">
-            <p style="color:#5a6e7c; text-align:center; padding:1rem;">✨ Click any travel option above to start booking</p>
+            <div style="text-align:center; padding: 2rem; color:#6B8DA8;"><i class="fas fa-plane-departure fa-2x"></i><br/>✨ Choose any travel partner above ✨</div>
         </div>
     </div>
 
-    <!-- History Panel (hidden initially) -->
     <div id="historyTab" style="display: none;" class="booking-panel">
         <div class="panel-header">
-            <div class="panel-title">📜 My Booking History</div>
+            <div class="panel-title"><i class="fas fa-timeline"></i> My travel memoirs</div>
         </div>
         <div id="historyList"></div>
     </div>
 </div>
 
-<!-- Payment Modal -->
 <div id="paymentModal" class="modal">
     <div class="modal-content">
-        <h3>💳 Complete Payment</h3>
-        <p id="paymentAmount" style="margin: 10px 0; font-size: 1.3rem; color: #1a5a7a;"></p>
+        <h3><i class="fas fa-lock"></i> Secure Payment</h3>
+        <p id="paymentAmount" style="margin: 12px 0; font-size: 1.8rem; font-weight: 800; color: #D97706;"></p>
         <div id="paymentOptions">
-            <div class="payment-option" data-method="card">💳 Credit/Debit Card</div>
-            <div class="payment-option" data-method="upi">📱 UPI (Google Pay / PhonePe)</div>
-            <div class="payment-option" data-method="wallet">💰 Wallet (PayTM / Amazon Pay)</div>
+            <div class="payment-option" data-method="card"><i class="fab fa-cc-visa"></i> Credit / Debit Card</div>
+            <div class="payment-option" data-method="upi"><i class="fas fa-mobile-alt"></i> UPI (GPay / PhonePe)</div>
+            <div class="payment-option" data-method="wallet"><i class="fas fa-wallet"></i> Digital Wallet</div>
         </div>
-        <button id="closePaymentModal" style="margin-top: 15px; background: #ccc; border: none; padding: 8px; border-radius: 2rem; cursor: pointer;">Cancel</button>
+        <button id="closePaymentModal" style="margin-top: 20px; background: #EFF3F8; border: none; padding: 10px; border-radius: 2rem; cursor: pointer; width: 100%; font-weight: 600;">Cancel</button>
     </div>
 </div>
 
 <script>
     // ---------- USER STATE ----------
-    let currentUser = null;  // { name, email, bookings[] }
-    let pendingBookingData = null; // store before payment
+    let currentUser = null;  
+    let pendingBookingData = null;
 
-    // Load from localStorage
     function loadUserData() {
-        const saved = localStorage.getItem("travelhub_user");
+        const saved = localStorage.getItem("velora_user");
         if (saved) {
             currentUser = JSON.parse(saved);
         } else {
@@ -324,9 +424,9 @@
     }
     function saveUserData() {
         if (currentUser) {
-            localStorage.setItem("travelhub_user", JSON.stringify(currentUser));
+            localStorage.setItem("velora_user", JSON.stringify(currentUser));
         } else {
-            localStorage.removeItem("travelhub_user");
+            localStorage.removeItem("velora_user");
         }
     }
 
@@ -334,21 +434,20 @@
         const greetingSpan = document.getElementById("userGreeting");
         const authBtn = document.getElementById("authBtn");
         if (currentUser) {
-            greetingSpan.innerHTML = `👤 ${currentUser.name}`;
-            authBtn.innerHTML = "Logout";
+            greetingSpan.innerHTML = `<i class="fas fa-crown"></i> ${currentUser.name}`;
+            authBtn.innerHTML = "<i class='fas fa-sign-out-alt'></i> Logout";
             authBtn.classList.add("logout");
         } else {
-            greetingSpan.innerHTML = "👋 Guest";
-            authBtn.innerHTML = "Login / Signup";
+            greetingSpan.innerHTML = "<i class='far fa-user-circle'></i> Explorer";
+            authBtn.innerHTML = "<i class='fas fa-key'></i> Login / Signup";
             authBtn.classList.remove("logout");
         }
     }
 
-    // Simple Login Modal (prompt based but nice)
     function showLoginModal() {
-        const name = prompt("Enter your name:", "Traveler");
+        const name = prompt("🌟 Welcome! Enter your name:", "Traveler");
         if (name && name.trim()) {
-            const email = prompt("Enter your email:", `${name.toLowerCase().replace(/\s/g, '')}@example.com`);
+            const email = prompt("📧 Your email address:", `${name.toLowerCase().replace(/\s/g, '')}@traveler.com`);
             if (email) {
                 currentUser = {
                     name: name.trim(),
@@ -357,8 +456,8 @@
                 };
                 saveUserData();
                 updateUserUI();
-                renderHistoryTab(); // refresh history if visible
-                alert(`✅ Welcome ${currentUser.name}! You can now book and see history.`);
+                renderHistoryTab();
+                alert(`✨ Welcome aboard ${currentUser.name}! Unlock exclusive travel deals ✨`);
             }
         }
     }
@@ -368,19 +467,19 @@
         saveUserData();
         updateUserUI();
         renderHistoryTab();
-        alert("Logged out successfully.");
+        alert("🔓 You have been logged out. See you soon!");
     }
 
-    // ---------- SERVICE DATA ----------
+    // ---------- SERVICE CATALOG (enhanced) ----------
     const services = [
-        { id: "uber", name: "Uber", icon: "🚕", displayName: "🚕 Uber", type: "cab", provider: "Uber", fields: ["pickup", "drop", "date", "time"], rideTypes: ["Economy", "Premium", "UberXL"] },
-        { id: "ola", name: "Ola", icon: "🚖", displayName: "🚖 Ola", type: "cab", provider: "Ola", fields: ["pickup", "drop", "date", "time"], rideTypes: ["Micro", "Mini", "Prime Sedan"] },
-        { id: "rapido", name: "Rapido", icon: "🏍️", displayName: "🏍️ Rapido", type: "bike", provider: "Rapido", fields: ["pickup", "drop", "date", "time"], rideTypes: ["Bike Taxi", "Auto"] },
-        { id: "bus", name: "Bus", icon: "🚌", displayName: "🚌 State Bus", type: "bus", provider: "StateRoadways", fields: ["from", "to", "date", "busType"], busOptions: ["Standard", "AC Sleeper", "Volvo"] },
-        { id: "redbus", name: "RedBus", icon: "🎫", displayName: "🎫 RedBus", type: "bus", provider: "RedBus", fields: ["from", "to", "date", "busType"], busOptions: ["Rajahamsa", "Garuda"] },
-        { id: "train", name: "Train", icon: "🚆", displayName: "🚆 IRCTC", type: "train", provider: "IRCTC", fields: ["from", "to", "date", "classType"], classOptions: ["Sleeper", "AC 3 Tier", "AC 2 Tier"] },
-        { id: "railone", name: "RailOne", icon: "🚄", displayName: "🚄 RailOne", type: "train", provider: "RailOne", fields: ["from", "to", "date", "classType"], classOptions: ["Executive", "Business"] },
-        { id: "flight", name: "Flight", icon: "✈️", displayName: "✈️ Flight", type: "flight", provider: "SkyScanners", fields: ["from", "to", "departDate", "returnDate", "passengers"], flightClass: ["Economy", "Business"] }
+        { id: "uber", name: "Uber", icon: "🚕", displayName: "Uber Lux", type: "cab", provider: "Uber", fields: ["pickup", "drop", "date", "time"], rideTypes: ["Economy", "Comfort", "Black"] },
+        { id: "ola", name: "Ola", icon: "🚖", displayName: "Ola Prime", type: "cab", provider: "Ola", fields: ["pickup", "drop", "date", "time"], rideTypes: ["Micro", "Mini", "Prime Sedan"] },
+        { id: "rapido", name: "Rapido", icon: "🏍️", displayName: "Rapido Moto", type: "bike", provider: "Rapido", fields: ["pickup", "drop", "date", "time"], rideTypes: ["Bike Taxi", "Auto"] },
+        { id: "bus", name: "Bus", icon: "🚌", displayName: "Intercity Bus", type: "bus", provider: "StateRoadways", fields: ["from", "to", "date", "busType"], busOptions: ["Standard", "AC Sleeper", "Luxury Volvo"] },
+        { id: "redbus", name: "RedBus", icon: "🎫", displayName: "RedRail Express", type: "bus", provider: "RedBus", fields: ["from", "to", "date", "busType"], busOptions: ["Rajahamsa", "Garuda Plus"] },
+        { id: "train", name: "Train", icon: "🚆", displayName: "IRCTC Superfast", type: "train", provider: "IRCTC", fields: ["from", "to", "date", "classType"], classOptions: ["Sleeper", "AC 3 Tier", "AC 2 Tier", "1st AC"] },
+        { id: "railone", name: "RailOne", icon: "🚄", displayName: "Vande Bharat", type: "train", provider: "RailOne", fields: ["from", "to", "date", "classType"], classOptions: ["Executive Chair", "Business Class"] },
+        { id: "flight", name: "Flight", icon: "✈️", displayName: "SkyWings", type: "flight", provider: "SkyScanners", fields: ["from", "to", "departDate", "returnDate", "passengers"], flightClass: ["Economy", "Premium", "Business"] }
     ];
 
     let currentService = null;
@@ -401,17 +500,17 @@
 
     function getFieldHTML(fieldName, service) {
         const labels = {
-            pickup: { label: "📍 Pickup", type: "text", placeholder: "Enter address", required: true },
-            drop: { label: "🏁 Drop", type: "text", placeholder: "Destination", required: true },
-            date: { label: "📅 Date", type: "date", required: true },
-            time: { label: "⏰ Time", type: "time", required: true },
-            from: { label: "🏙️ From", type: "text", placeholder: "City", required: true },
-            to: { label: "📍 To", type: "text", placeholder: "City", required: true },
-            busType: { label: "🚌 Bus Type", type: "select", options: service.busOptions || ["Standard"], required: true },
-            classType: { label: "🎫 Class", type: "select", options: service.classOptions || ["Sleeper"], required: true },
-            departDate: { label: "✈️ Depart", type: "date", required: true },
-            returnDate: { label: "🔄 Return", type: "date", required: false },
-            passengers: { label: "👥 Passengers", type: "number", min: 1, max: 9, required: true }
+            pickup: { label: "📍 Pickup point", type: "text", placeholder: "Enter location", required: true },
+            drop: { label: "🏁 Destination", type: "text", placeholder: "Where to?", required: true },
+            date: { label: "📅 Travel date", type: "date", required: true },
+            time: { label: "⏰ Pickup time", type: "time", required: true },
+            from: { label: "🌆 Origin city", type: "text", placeholder: "City name", required: true },
+            to: { label: "🏙️ Destination city", type: "text", placeholder: "City name", required: true },
+            busType: { label: "🚌 Coach type", type: "select", options: service.busOptions || ["Standard"], required: true },
+            classType: { label: "✨ Travel class", type: "select", options: service.classOptions || ["Sleeper"], required: true },
+            departDate: { label: "✈️ Departure", type: "date", required: true },
+            returnDate: { label: "🔄 Return (optional)", type: "date", required: false },
+            passengers: { label: "👥 Travelers", type: "number", min: 1, max: 9, required: true }
         };
         const cfg = labels[fieldName];
         if (!cfg) return `<div class="input-group"><label>${fieldName}</label><input type="text" id="${fieldName}"></div>`;
@@ -430,7 +529,7 @@
         currentService = service;
         selectedRideVariant = (service.rideTypes && service.rideTypes[0]) || (service.busOptions && service.busOptions[0]) || (service.classOptions && service.classOptions[0]) || "Standard";
         const panelTitle = document.getElementById("panelTitle");
-        panelTitle.innerHTML = `<span>${service.icon}</span> ${service.displayName} Booking`;
+        panelTitle.innerHTML = `<i class="fas fa-ticket-alt"></i> ${service.displayName} • instant booking`;
 
         let html = `<div class="booking-form">`;
         const fields = service.fields;
@@ -441,24 +540,22 @@
             html += `</div>`;
         }
         if (service.type === "cab" || service.type === "bike") {
-            html += `<div class="input-group"><label>🚗 Ride Type</label><div class="ride-options" id="rideTypeSelector">`;
+            html += `<div class="input-group"><label><i class="fas fa-car-side"></i> Ride category</label><div class="ride-options" id="rideTypeSelector">`;
             (service.rideTypes || ["Economy"]).forEach(opt => {
                 html += `<div data-ride="${opt}" class="ride-type-btn ${opt === selectedRideVariant ? 'selected-ride' : ''}">${opt}</div>`;
             });
             html += `</div></div>`;
         }
         if (service.type === "bus") {
-            html += `<div class="input-group"><label>🚏 Boarding Point</label><input type="text" id="boardingPoint" placeholder="Optional"></div>`;
+            html += `<div class="input-group"><label>🚏 Boarding point (optional)</label><input type="text" id="boardingPoint" placeholder="Add landmark"></div>`;
         }
         if (service.type === "train") {
-            html += `<div class="input-group"><label>🛏️ Berth</label><select id="berthPref"><option>No pref</option><option>Lower</option><option>Upper</option></select></div>`;
+            html += `<div class="input-group"><label>🛌 Berth preference</label><select id="berthPref"><option>No preference</option><option>Lower</option><option>Upper</option></select></div>`;
         }
-        // Fare Calendar hint
-        html += `<div class="fare-calendar">📊 Fare Calendar: ${getFareHint(service.type)} estimated prices shown at booking.</div>`;
-        html += `<button class="book-btn" id="proceedToPayBtn">💳 Proceed to Payment</button></div>`;
+        html += `<div class="fare-calendar"><i class="fas fa-chart-line"></i> Dynamic fare range: ${getFareHint(service.type)} • instant confirmation</div>`;
+        html += `<button class="book-btn" id="proceedToPayBtn"><i class="fas fa-shield-alt"></i> Proceed to secure payment</button></div>`;
         document.getElementById("dynamicFormContainer").innerHTML = html;
 
-        // ride selector
         if (service.type === "cab" || service.type === "bike") {
             document.querySelectorAll('.ride-type-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
@@ -472,37 +569,35 @@
     }
 
     function getFareHint(type) {
-        if (type === "cab") return "₹150-500";
-        if (type === "bike") return "₹35-120";
-        if (type === "bus") return "₹300-1500";
-        if (type === "train") return "₹400-3000";
-        if (type === "flight") return "₹3000-15000";
-        return "₹200-2000";
+        if (type === "cab") return "₹190 - ₹690";
+        if (type === "bike") return "₹35 - ₹140";
+        if (type === "bus") return "₹390 - ₹1850";
+        if (type === "train") return "₹490 - ₹3600";
+        if (type === "flight") return "₹3,490 - ₹18,900";
+        return "₹250 - 2500";
     }
 
-    // Payment Modal & Booking with History
     function showPaymentModal(service) {
         if (!currentUser) {
-            alert("🔐 Please login/signup first to complete booking!");
+            alert("🔐 Please login to unlock magic! Create your travel profile.");
             showLoginModal();
             return;
         }
-        // collect form data
         const formData = {};
         for (let f of service.fields) {
             const el = document.getElementById(f);
-            if (el) formData[f] = el.value.trim() || "Not specified";
+            if (el) formData[f] = el.value.trim() || "TBD";
         }
         if (service.type === "cab" && (!formData.pickup || !formData.drop)) {
-            alert("Please fill pickup and drop locations.");
+            alert("📍 Please fill both pickup and drop locations");
             return;
         }
         if ((service.type === "bus" || service.type === "train") && (!formData.from || !formData.to)) {
-            alert("Please fill origin and destination.");
+            alert("🏙️ Please enter origin and destination cities");
             return;
         }
         if (service.type === "flight" && (!formData.from || !formData.to || !formData.departDate)) {
-            alert("Flight: fill origin, destination and departure date.");
+            alert("✈️ Flight requires origin, destination & departure date");
             return;
         }
 
@@ -515,14 +610,13 @@
         if (service.type === "bus") extra = document.getElementById("boardingPoint")?.value || "";
         if (service.type === "train") extra = document.getElementById("berthPref")?.value || "";
         
-        // calculate fare (simulated)
         let fare = 0;
-        if (service.type === "cab") fare = Math.floor(Math.random() * 400 + 150);
-        else if (service.type === "bike") fare = Math.floor(Math.random() * 90 + 35);
-        else if (service.type === "bus") fare = Math.floor(Math.random() * 1200 + 300);
-        else if (service.type === "train") fare = Math.floor(Math.random() * 2500 + 400);
-        else if (service.type === "flight") fare = Math.floor(Math.random() * 12000 + 3000);
-        else fare = 500;
+        if (service.type === "cab") fare = Math.floor(Math.random() * 480 + 180);
+        else if (service.type === "bike") fare = Math.floor(Math.random() * 95 + 35);
+        else if (service.type === "bus") fare = Math.floor(Math.random() * 1400 + 380);
+        else if (service.type === "train") fare = Math.floor(Math.random() * 3000 + 450);
+        else if (service.type === "flight") fare = Math.floor(Math.random() * 15000 + 3400);
+        else fare = 550;
 
         pendingBookingData = {
             service: service,
@@ -532,26 +626,26 @@
             fare: fare,
             timestamp: new Date().toISOString()
         };
-        document.getElementById("paymentAmount").innerHTML = `Total: ₹${fare}`;
+        document.getElementById("paymentAmount").innerHTML = `<i class="fas fa-rupee-sign"></i> ${fare.toLocaleString()}`;
         document.getElementById("paymentModal").style.display = "flex";
     }
 
     function completeBooking(paymentMethod) {
         if (!pendingBookingData || !currentUser) return;
         const { service, formData, rideVariant, extra, fare, timestamp } = pendingBookingData;
-        const bookingRef = `THB-${Math.floor(Math.random()*90000+10000)}`;
+        const bookingRef = `VL-${Math.floor(Math.random()*90000+10000)}`;
         let details = "";
         if (service.type === "cab" || service.type === "bike") {
-            details = `${service.provider} • ${rideVariant} | ${formData.pickup} → ${formData.drop} on ${formData.date} ${formData.time}`;
+            details = `${service.provider} • ${rideVariant} | ${formData.pickup} → ${formData.drop} | ${formData.date} at ${formData.time}`;
         } else if (service.type === "bus") {
             const busType = formData.busType || "Standard";
-            details = `${service.provider} Bus | ${formData.from} → ${formData.to} | ${formData.date} | ${busType} | Boarding: ${extra || "Default"}`;
+            details = `${service.provider} Bus | ${formData.from} → ${formData.to} | ${formData.date} | ${busType} | Board: ${extra || "Main"}`;
         } else if (service.type === "train") {
             const trainClass = formData.classType || "Sleeper";
-            details = `${service.provider} Train | ${formData.from} → ${formData.to} | ${trainClass} | ${formData.date} | Berth: ${extra}`;
+            details = `${service.provider} ${trainClass} | ${formData.from} → ${formData.to} | ${formData.date} | ${extra}`;
         } else if (service.type === "flight") {
-            const returnInfo = formData.returnDate ? `Return ${formData.returnDate}` : "One Way";
-            details = `Flight ${formData.from}✈️${formData.to} | ${formData.departDate} | Pax:${formData.passengers || 1} | ${returnInfo}`;
+            const returnInfo = formData.returnDate ? `Return ${formData.returnDate}` : "One way";
+            details = `Flight ${formData.from}✈️${formData.to} | ${formData.departDate} | ${formData.passengers || 1} pax | ${returnInfo}`;
         }
         const booking = {
             id: bookingRef,
@@ -566,11 +660,10 @@
         if (!currentUser.bookings) currentUser.bookings = [];
         currentUser.bookings.unshift(booking);
         saveUserData();
-        alert(`✅ Booking Confirmed!\nRef: ${bookingRef}\n₹${fare} paid via ${paymentMethod}\nDetails: ${details}`);
+        alert(`🎉 Booking confirmed! \nRef: ${bookingRef}\n💸 ₹${fare} via ${paymentMethod}\n📌 ${details}`);
         document.getElementById("paymentModal").style.display = "none";
         pendingBookingData = null;
         renderHistoryTab();
-        // Switch to history tab automatically
         document.querySelector('.tab-btn[data-tab="history"]').click();
     }
 
@@ -578,15 +671,15 @@
         const historyDiv = document.getElementById("historyList");
         if (!historyDiv) return;
         if (!currentUser || !currentUser.bookings || currentUser.bookings.length === 0) {
-            historyDiv.innerHTML = `<div class="empty-history">📭 No bookings yet. Click any service and complete payment to see history.</div>`;
+            historyDiv.innerHTML = `<div class="empty-history"><i class="fas fa-compass fa-2x"></i><br/>Your travel tales await — book your first adventure!</div>`;
             return;
         }
-        let tableHtml = `<table class="history-table"><thead><tr><th>ID</th><th>Service</th><th>Details</th><th>Fare</th><th>Payment</th><th>Booked On</th></tr></thead><tbody>`;
+        let tableHtml = `<table class="history-table"><thead><tr><th>ID</th><th>Service</th><th>Journey details</th><th>Amount</th><th>Paid via</th><th>Booked on</th></tr></thead><tbody>`;
         currentUser.bookings.forEach(b => {
             tableHtml += `<tr>
-                <td>${b.id}</td>
-                <td>${b.serviceName}</td>
-                <td style="max-width:250px; word-break:break-word;">${b.details.substring(0,80)}</td>
+                <td><span style="font-family:monospace;">${b.id}</span></td>
+                <td><strong>${b.serviceName}</strong></td>
+                <td style="max-width:260px; word-break:break-word;">${b.details.substring(0,85)}</td>
                 <td>₹${b.fare}</td>
                 <td>${b.paymentMethod}</td>
                 <td>${b.bookedOn}</td>
@@ -596,7 +689,6 @@
         historyDiv.innerHTML = tableHtml;
     }
 
-    // Tab switching
     function initTabs() {
         const tabs = document.querySelectorAll('.tab-btn');
         const bookingTab = document.getElementById('bookingTab');
@@ -618,7 +710,6 @@
         });
     }
 
-    // Payment modal listeners
     function initPaymentModal() {
         const modal = document.getElementById('paymentModal');
         document.querySelectorAll('.payment-option').forEach(opt => {
@@ -634,7 +725,6 @@
         window.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
     }
 
-    // Auth button
     function initAuth() {
         document.getElementById('authBtn').addEventListener('click', () => {
             if (currentUser) logout();
@@ -648,8 +738,7 @@
         initTabs();
         initAuth();
         initPaymentModal();
-        // default booking panel hint
-        document.getElementById("dynamicFormContainer").innerHTML = `<p style="color:#5a6e7c; text-align:center; padding:1rem;">✨ Click any travel card — Uber, Ola, Bus, Train, Flight — to book with payment & history</p>`;
+        document.getElementById("dynamicFormContainer").innerHTML = `<div style="text-align:center; padding: 2rem; color:#6B8DA8;"><i class="fas fa-map-marked-alt fa-3x"></i><br/><span style="font-weight:500;">Tap any travel icon — Uber, Flights, Trains — and soar ✨</span></div>`;
     }
     init();
 </script>
